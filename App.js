@@ -1,112 +1,71 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  bg: { flex:1, paddingTop: 150, alignItems: 'center', backgroundColor: '#E0E5DF' },
+  veri: {fontSize: 40, fontWeight: 'bold'},
+  smalltext: { fontSize: 25,  fontWeight: 'bold'},
+  button1: {
+    width: 150,
+    height: 50,
+    marginRight: 5,
+    alignItems: 'center',
+    paddingTop: 10,
+    borderRadius: 10,
+    backgroundColor: '#1C8C06'
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  button2: {
+    width: 150,
+    height: 50,
+    marginLeft: 5,
+    alignItems: 'center',
+    paddingTop: 10,
+    borderRadius: 10,
+    backgroundColor: '#F30606'
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+  buttonText: {
+    fontSize: 25,
+    color: '#fff'
+  }
 });
 
+class Counter extends React.Component {
+  state = { count: 0 };
+
+  Increment = () => this.setState(
+    prevState => ({ ...prevState, count: this.state.count + 1 })
+  )
+
+  Decrement = () => this.setState(
+    prevState => ({ ...prevState, count: this.state.count - 1 })
+  )
+
+  render() {
+    const { count } = this.state;
+    return (
+      <View style={[styles.bg]}>
+        <View style={{ height: 60 }}>
+          <Text style={styles.veri}>Hello Veri</Text>
+        </View>
+        <View style={{ height: 60 }}>
+          <Text style={styles.smalltext}>You clicked {count} times</Text>
+        </View>
+        <View style={{ height: 60, flexDirection: 'row'}}>
+          <TouchableOpacity style={styles.button1} onPress={this.Increment}>
+            <Text style={styles.buttonText}>Increment</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button2} onPress={this.Decrement}>
+            <Text style={styles.buttonText}>Decrement</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+}
+
+const App = () => (
+  <Counter />
+);
+
 export default App;
+
